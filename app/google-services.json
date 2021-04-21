@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "786800541918",
+    "project_id": "tradeview-5a8f0",
+    "storage_bucket": "tradeview-5a8f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:786800541918:android:36ef81bebb50373d16c24f",
+        "android_client_info": {
+          "package_name": "com.example.tradeview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "786800541918-8j6iojonauql3li25h4a41qajjepqcpp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr1zc22uprI1HpZ5U5jDMWyAFVJZlRW90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "786800541918-8j6iojonauql3li25h4a41qajjepqcpp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
