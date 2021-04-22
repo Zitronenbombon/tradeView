@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tradeView</string>
+
+    <string name="welcome">Willkommen!!</string>
+    <string name="logout">Abmelden</string>
+    <string name="textfield1">Neuen Benutzer anlegen</string>
+    <string name="name">Vorname, Nachname</string>
+    <string name="email">eMail</string>
+    <string name="password">Passwort</string>
+    <string name="phone">Handy</string>
+    <string name="registerBtn">Regestrieren</string>
+    <string name="loginText">zum Anmeldeverfahren</string>
+    <string name="loginBtn">Anmelden</string>
+    <string name="registerText">neuen Benutzer registrieren</string>
+    <string name="changeLang">Sprache ändern</string>
+</resources>

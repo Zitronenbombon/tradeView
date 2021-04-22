@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">tradeView</string>
+
+    <string name="welcome">!Welcome</string>
+    <string name="logout">Logout</string>
+    <string name="textfield1">Create New Account</string>
+    <string name="name">Full Name</string>
+    <string name="email">eMail</string>
+    <string name="password">password</string>
+    <string name="phone">phone</string>
+    <string name="registerBtn">Register</string>
+    <string name="loginText">login here</string>
+    <string name="loginBtn">Login</string>
+    <string name="registerText">create new Account</string>
+    <string name="changeLang">change Language</string>
 </resources>
