@@ -13,4 +13,6 @@
     <string name="loginBtn">Login</string>
     <string name="registerText">create new Account</string>
     <string name="changeLang">change Language</string>
+    <string name="saldoText">Balance </string>
+
 </resources>

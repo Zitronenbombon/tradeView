@@ -1,5 +1,6 @@
 package com.example.tradeview;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,18 +12,42 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
+    TextView balance;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadLocale();
         setContentView(R.layout.activity_main);
+        balance = findViewById(R.id.showSaldo);
+
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+
+        userId = fAuth.getCurrentUser().getUid();
+
+        DocumentReference documentReference = fStore.collection("users").document(userId);
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                balance.setText(getResources().getString(R.string.saldoText) + ": " + documentSnapshot.getLong("saldo").intValue());
+            }
+        });
+
 
         Button changeLang = findViewById(R.id.changeLanguage);
         changeLang.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void logout (View view){
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),Login.class));
+        finish();
+    }
+
+    //switch language part
 
     private void showChangeLanguageDialog() {
         //array of languages to choose from
@@ -80,9 +113,5 @@ public class MainActivity extends AppCompatActivity {
         setLocale(language);
     }
 
-    public void logout (View view){
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(),Login.class));
-        finish();
-    }
+
 }
