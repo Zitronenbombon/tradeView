@@ -29,5 +29,14 @@
         android:onClick="logout"
         />
 
+    <Button
+        android:id="@+id/losgehtesid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="losgehtes"
+        android:backgroundTint="@color/black"
+        tools:layout_editor_absoluteX="210dp"
+        tools:layout_editor_absoluteY="224dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

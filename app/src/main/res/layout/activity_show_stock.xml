@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".showStock"
+    android:id="@+id/showstockid"
+    tools:ignore="ExtraText">
+
+    //graph- und preis-anzeige
+
+    <TextView
+        android:id="@+id/stockPriceID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="168dp"
+        android:layout_weight="3"
+        android:text="22,36"
+        android:textAlignment="textEnd"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/geldeinheitid" />
+
+    <TextView
+        android:id="@+id/stockchangeid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="60dp"
+        android:layout_weight="3"
+        android:text="+1,73%"
+        android:textAlignment="textEnd"
+        android:textColor="@color/teal_200"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/graphfragment_containerid"
+        app:layout_constraintTop_toBottomOf="@+id/stockPriceID" />
+
+    <TextView
+        android:id="@+id/geldeinheitid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="180dp"
+        android:layout_weight="3"
+        android:text="  €"
+        android:textColor="@color/white"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/graphfragment_containerid" />
+
+    <FrameLayout
+        android:id="@+id/graphfragment_containerid"
+        android:layout_width="217dp"
+        android:layout_height="197dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--hier kommt ein fragment für den stockGraph rein i guess-->
+
+    </FrameLayout>
+
+
+    //LinearLayout graph-einstellungen
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002">
+
+        <TextView
+            android:id="@+id/tagid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TAG"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/wocheid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="WOCHE"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/monatid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MONAT"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/jahrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="3 MONATE"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/sechsmonateid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="6 MONATE"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/fuenfjahreid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="JAHR"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/zwischenkaufenverkaufen"
+        android:orientation="horizontal"
+        android:showDividers="middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/kaufenid"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_weight="1"
+            android:background="@drawable/kaufenbutton"
+            android:text="@string/kaufen"
+            android:stateListAnimator="@null"
+            android:textSize="15sp"
+            app:backgroundTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:strokeColor="#D320D127"
+            app:strokeWidth="4dp" />
+        <!--weiß nicht ob dieses statelistanimator nötig ist-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/verkaufenid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/kaufenbutton"
+            android:text="@string/verkaufen"
+            android:textSize="15sp"
+            app:backgroundTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+            app:strokeColor="#E6FB1D1D"
+            app:strokeWidth="4dp" />
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/unteresfragment_containerid"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toTopOf="@+id/zurueckbuttonshowstockid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <fragment
+            android:id="@+id/homefragmentid"
+            android:name="com.example.tradeview.homeStock1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <fragment
+            android:id="@+id/buyfragmentid"
+            android:name="com.example.tradeview.buyStock1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <fragment
+            android:id="@+id/sellfragmentid"
+            android:name="com.example.tradeview.sellStock1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/zurueckbuttonshowstockid"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:backgroundTint="@color/black"
+        android:text="zurück"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/sinnlosesedittextid"
+        android:layout_width="102dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="500dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/meddl"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/sinnlosetextanzeigeid"
+        android:layout_width="90dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="32dp"
+        android:text="sinnloser text incoming"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/sinnlosesedittextid"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
