@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="unteresframelayout_height_homestock1">400dp</dimen>
+    <dimen name="textsize_20_home_buy_sell">20sp</dimen>
+    <dimen name="layoutmargin_10_home_buy_sell">10dp</dimen>
+    <dimen name="layoutmarginstart_40_home_buy_sell">40dp</dimen>
+</resources>

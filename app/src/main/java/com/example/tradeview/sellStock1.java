@@ -30,7 +30,7 @@ public class sellStock1 extends Fragment {
         // Inflate the layout for this fragment
         View vvvvvvvvvvvvvv = inflater.inflate(R.layout.fragment_sell_stock1, container, false);
         //connect the visual components to my javacode
-        textsellfragment = (TextView) vvvvvvvvvvvvvv.findViewById(R.id.textsellfragmentid);
+        textsellfragment = (TextView) vvvvvvvvvvvvvv.findViewById(R.id.wievieleid);
         sellbutton = (Button) vvvvvvvvvvvvvv.findViewById(R.id.sellbuttonid);
         sellbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +43,7 @@ public class sellStock1 extends Fragment {
         buttonfragmentsellzurueck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmenttransactionBACKTOHOME = getParentFragmentManager().beginTransaction();
+                FragmentTransaction fragmenttransactionBACKTOHOME = getFragmentManager().beginTransaction();
                 fragmenttransactionBACKTOHOME.replace(R.id.unteresfragment_containerid, new homeStock1(), "BACKTOHOMEFROMSELL").commit();
             }
         });

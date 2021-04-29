@@ -9,12 +9,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class showStock extends AppCompatActivity implements buyStock1.OnFragmentInteractionListener {
+
+public class showStock extends AppCompatActivity { //implements buyStock1.OnFragmentInteractionListener
     Button buttonTag;
     Button buttonWoche;
     Button buttonMonat;
@@ -25,23 +32,53 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
     ImageButton buttonGrapheinstellen;
     Button buttonKaufen;
     Button buttonVerkaufen;
+    Button zurueckbuttonshowstock;
     TextView stockChange;
     //variables for fragment
     private FrameLayout fragmentContainer;
     //brauche ich eig nicht
     private EditText buysinnlosesedittextlol;
     private TextView sinnlosetextanzeige;
-    FragmentTransaction mFragmenttransaction;
-    Button zurueckbuttonshowstock;
+    //FragmentTransaction mFragmenttransaction;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    String userid;
+    //importieren von STOCKVALUE (eines bestimmten stocks momentan noch [MrBeast]) und DEPOTWERT
+    static int stockValue;
+    static int verfuegbarerDepotbestand;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_stock);
-        //DIESE ACTIVIITY MUSS JE DANACH, OB EIN USER DIE GEZEIGTE AKTIE BESITZT ODER NICHT, ENTWEDER KAUFEN/VERKAUFEN ANZEIGEN ODER NUR KAUFEN (was ist mit shorten?)
+        //DIESE ACTIVIITY MUSS JE DANACH, OB EIN USER DIE GEZEIGTE AKTIE BESITZT ODER NICHT, ENTWEDER KAUFEN/VERKAUFEN ANZEIGEN ODER KAUFEN/SHORTEN
 //------------------------------------------------
         fragmentContainer = (FrameLayout) findViewById(R.id.unteresfragment_containerid);
 
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userid = fAuth.getCurrentUser().getUid();
+
+        DocumentReference documentReferenceUser = fStore.collection("user").document(userid);
+        documentReferenceUser.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                verfuegbarerDepotbestand = documentSnapshot.getLong("saldo").intValue();
+                System.out.println(documentSnapshot.getLong("saldo").intValue());
+            }
+        });
+        System.out.println("maggi ist " + verfuegbarerDepotbestand); //wird ausgeführt bevor verfuegbarerDepobestand oben eingereicht wird
+        System.out.println("user id ist " + userid);
+
+        DocumentReference documentReferenceStock = fStore.collection("stocks").document("Ba6WytX14u3gReyDGtEn");
+        documentReferenceStock.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                //  balance.setText(getResources().getString(R.string.saldoText) + ": " + documentSnapshot.getLong("value").intValue());
+                stockValue = documentSnapshot.getLong("value").intValue();
+
+            }
+        });
 
 
 
@@ -123,9 +160,10 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
                 startActivity(new Intent(showStock.this, buyStock.class));
             }
         });
-
-
 */
+
+
+//zurückbutton zur mainactivity
         zurueckbuttonshowstock = (Button) findViewById(R.id.zurueckbuttonshowstockid);
         zurueckbuttonshowstock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,14 +175,30 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
 
 
 
-
-//FRAGMENTS_____________________________________________________________________________________________________________
 //home fragment:
         FragmentTransaction mFragmenttransactionhome = getSupportFragmentManager().beginTransaction(); //assigning of the fragment transaction
         homeStock1 HOMEfragment = new homeStock1();
         mFragmenttransactionhome.replace(R.id.unteresfragment_containerid, HOMEfragment, "HOMEFRAGMENT"); //replace the fragmentcontainer with the fragment :D so that the homefragment shows when starting activity
         mFragmenttransactionhome.commit();
 
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //buy fragment:
         buttonKaufen = (Button) findViewById(R.id.kaufenid);
         buysinnlosesedittextlol = (EditText) findViewById(R.id.sinnlosesedittextid);
@@ -153,13 +207,14 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
             @Override
             public void onClick(View v) {
                 //überprüfen, ob das buy-fragment schon angezeigt wird (find by tag)
-                buyStock1 mBuy = (buyStock1) getSupportFragmentManager().findFragmentByTag("BUYFRAGMENT");
-                if(mBuy != null && mBuy.isVisible()) {}
-                else { String sinnlosertext = buysinnlosesedittextlol.getText().toString();
-                openFragmentbuy(sinnlosertext); }
+                //   buyStock1 mBuy = (buyStock1) getSupportFragmentManager().findFragmentByTag("BUYFRAGMENT");
+                //   if(mBuy != null && mBuy.isVisible()) {}
+                //    else { String sinnlosertext = buysinnlosesedittextlol.getText().toString();
+                    //   openFragmentbuy(sinnlosertext); }
+                String sinnlosertext = buysinnlosesedittextlol.getText().toString();
+                openFragmentbuy(sinnlosertext);
             }
         });
-
 //sel fragment:
         buttonVerkaufen = (Button) findViewById(R.id.verkaufenid);
 
@@ -167,35 +222,31 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
             @Override
             public void onClick(View v) {
                 //überprüfen, ob das sell-fragment schon angezeigt wird (find by tag)
-                sellStock1 mSell = (sellStock1) getSupportFragmentManager().findFragmentByTag("SELLFRAGMENT");
-                if(mSell != null && mSell.isVisible()) {}
-               else { openFragmentsell(); }
-               // openFragmentsell();
+                //  sellStock1 mSell = (sellStock1) getSupportFragmentManager().findFragmentByTag("SELLFRAGMENT");
+                //     if(mSell != null && mSell.isVisible()) {}
+                //  else { openFragmentsell(); }
+               openFragmentsell();
             }
         });
-
-
-
-    }
-
-
-
-    public void openFragmentbuy(String sinnlosertext) {
-     //intiierung
-        buyStock1 BUYfragment = buyStock1.newInstance(sinnlosertext); //buy-fragment wird initiiert mit newInstance-method (, die Information weiterleitet, also hier: sinnlosertext)
-        FragmentManager fragmentManagerBUY = getSupportFragmentManager(); //fragment-manager
-        FragmentTransaction fragmenttransactionBUY = fragmentManagerBUY.beginTransaction(); //fragment-transaction
+public void openFragmentbuy(String sinnlosertext) {
+    //intiierung
+    buyStock1 BUYfragment = buyStock1.newInstance(sinnlosertext); //buy-fragment wird initiiert mit newInstance-method (, die Information weiterleitet, also hier: sinnlosertext)
+    FragmentManager fragmentManagerBUY = getSupportFragmentManager(); //fragment-manager
+    FragmentTransaction fragmenttransactionBUY = fragmentManagerBUY.beginTransaction(); //fragment-transaction
     //animations
-        fragmenttransactionBUY.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right); //vorher war alles in der klammer 2 mal, damit auch beim back button passiert ? oder so
+    fragmenttransactionBUY.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right); //vorher war alles in der klammer 2 mal, damit auch beim back button passiert ? oder so
     //fragment öffnen
-        fragmenttransactionBUY.addToBackStack(null);//fragment wird in backstack gepackt und kann remembered werden
-        fragmenttransactionBUY.add(R.id.unteresfragment_containerid, BUYfragment, "BUYFRAGMENT").commit();
-    }
+    fragmenttransactionBUY.addToBackStack(null);//fragment wird in backstack gepackt und kann remembered werden
+    fragmenttransactionBUY.add(R.id.unteresfragment_containerid, BUYfragment, "BUYFRAGMENT").commit();
+}
     public void openFragmentsell() {
         sellStock1 SELLfragment = new sellStock1();                                                                                            //sell-fragment wird initiiert
-        mFragmenttransaction = getSupportFragmentManager().beginTransaction();                                                                 //fragment-transaction
-        mFragmenttransaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_left);                                                //animations
-        mFragmenttransaction.replace(R.id.unteresfragment_containerid, SELLfragment, "SELLFRAGMENT").commit();                           //replace fragment
+        FragmentTransaction fragmenttransactionSELL;
+        fragmenttransactionSELL = getSupportFragmentManager().beginTransaction();                                                                 //fragment-transaction
+        fragmenttransactionSELL.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);                                                //animations
+        fragmenttransactionSELL.add(R.id.unteresfragment_containerid, SELLfragment, "BUYFRAGMENT").commit();
+
+        //  mFragmenttransaction.replace(R.id.unteresfragment_containerid, SELLfragment, "SELLFRAGMENT").commit();                           //replace fragment
 
 
   /*  //intiierung
@@ -210,7 +261,7 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
 
  //       mFragmenttransaction.replace(R.id.unteresfragment_containerid, SELLfragment, "SELLFRAGMENT"); //replace the fragmentcontainer with the fragment :D so that the homefragment shows when starting activity
    //     fragmenttransactionSELL.commit();
-*/
+
     }
 
     @Override
@@ -218,4 +269,4 @@ public class showStock extends AppCompatActivity implements buyStock1.OnFragment
         sinnlosetextanzeige.setText(sendbackText);
         onBackPressed();
     }
-}
+*/

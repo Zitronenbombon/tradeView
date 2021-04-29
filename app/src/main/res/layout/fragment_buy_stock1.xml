@@ -4,60 +4,147 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="@dimen/unteresframelayout_height_homestock1"
     tools:context=".buyStock1"
-    android:background="@android:color/holo_green_dark">
+    android:background="@color/black">
 
     <!-- TODO: Update blank fragment layout -->
 
-    <Button
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buybuttonid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="BUY"
-        android:backgroundTint="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textbuyfragmentid" />
-
-    <TextView
-        android:id="@+id/textbuyfragmentid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Einkaufsseite:D"
-        android:textSize="30sp"
-        android:textColor="@color/white"
+        android:layout_weight="1"
+        android:background="@drawable/kaufenbutton"
+        android:text="@string/kaufen"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:strokeColor="#D320D127"
+        app:strokeWidth="4dp" />
+
+
+<!--HAUPTLINEARLAYOUT-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+<!-- LL 1 -->
+        <LinearLayout
+            android:id="@+id/llwievieleid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+            <TextView
+                android:id="@+id/textbuyfragmentid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/wie_viele"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:typeface="normal" />
+            <EditText
+                android:id="@+id/putinamountofsharesid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autofillHints="Betrag eingeben"
+                android:textAlignment="viewEnd"
+                android:hint="@string/betrag_eingeben"
+                android:inputType="number"
+                android:textSize="@dimen/textsize_20_home_buy_sell"
+                android:textColor="@color/white"
+                android:textColorHint="#675F5F" />
+        </LinearLayout>
+
+<!-- LL 2 -->
+        <LinearLayout
+            android:id="@+id/llkaufpreisanzeigeid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp">
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/buycalculatorid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAlignment="viewEnd"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:typeface="normal"/>
+        </LinearLayout>
+
+<!-- ZWISCHENRAUM -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+<!-- LL 3 -->
+        <LinearLayout
+            android:id="@+id/llverfuegbarerbestandid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/verfuegbarerbestandid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/verfuegbarer_bestand"
+                android:textAlignment="textStart"
+                android:textColor="#776A6A"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="60dp"
+                tools:layout_editor_absoluteY="211dp" />
+            <TextView
+                android:id="@+id/verfuegbarerbestandanzeigeid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewEnd"
+                android:textColor="#776A6A"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="60dp"
+                tools:layout_editor_absoluteY="211dp" />
+        </LinearLayout>
+
+<!-- noch ein LL für Anzeige, wv. Aktien/Geld bereits in diese Aktie invest.? -->
+
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/zurueckbuttonbuyfragmentid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="doch nicht kaufen"
+        app:backgroundTint="@null"
+        android:text="@string/doch_nicht_kaufen"
+        app:strokeColor="#E6574747"
+        app:strokeWidth="4dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/black"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/putinamountofsharesEdittextid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/meddl"
-        android:ems="10"
-        android:inputType="number"
-        android:textColorHint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.28"
-        android:autofillHints="" />
 
 
 

@@ -4,22 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="@dimen/unteresframelayout_height_homestock1"
     android:background="@color/black"
     tools:context=".sellStock1">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
+
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/zurueckbuttonsellfragmentid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/black"
         android:text="doch nicht verkaufen"
+        android:textSize="15sp"
+        app:backgroundTint="@null"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="#E6574747"
+        app:strokeWidth="4dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/verkaufenid"
+        android:id="@+id/sellbuttonid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -27,13 +32,13 @@
         android:text="@string/verkaufen"
         android:textSize="15sp"
         app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:strokeColor="#E6FB1D1D"
-        app:strokeWidth="4dp"
-        tools:layout_editor_absoluteX="242dp"
-        tools:layout_editor_absoluteY="126dp" />
+        app:strokeWidth="4dp" />
 
     <TextView
-        android:id="@+id/textsellfragmentid"
+        android:id="@+id/wievieleid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Menge verkaufen"
@@ -45,17 +50,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />
-
-    <Button
-        android:id="@+id/sellbuttonid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:backgroundTint="@color/black"
-        android:text="SELL"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.284"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textsellfragmentid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

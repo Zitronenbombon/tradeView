@@ -1,8 +1,5 @@
 package com.example.tradeview;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -89,7 +89,7 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
 
                             userID = fAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference = fStore.collection("users").document(userID);
+                            DocumentReference documentReference = fStore.collection("user").document(userID);
                             Map<String,Object> user = new HashMap<>();
                             user.put("fName",fullName);
                             user.put("email",email);

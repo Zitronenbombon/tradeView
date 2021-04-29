@@ -135,73 +135,29 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@drawable/zwischenkaufenverkaufen"
-        android:orientation="horizontal"
-        android:showDividers="middle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/kaufenid"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="25dp"
-            android:layout_weight="1"
-            android:background="@drawable/kaufenbutton"
-            android:text="@string/kaufen"
-            android:stateListAnimator="@null"
-            android:textSize="15sp"
-            app:backgroundTint="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:strokeColor="#D320D127"
-            app:strokeWidth="4dp" />
-        <!--weiß nicht ob dieses statelistanimator nötig ist-->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/verkaufenid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="50dp"
-            android:layout_weight="1"
-            android:background="@drawable/kaufenbutton"
-            android:text="@string/verkaufen"
-            android:textSize="15sp"
-            app:backgroundTint="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-            app:strokeColor="#E6FB1D1D"
-            app:strokeWidth="4dp" />
-    </LinearLayout>
-
-
     <FrameLayout
         android:id="@+id/unteresfragment_containerid"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="@dimen/unteresframelayout_height_homestock1"
         app:layout_constraintBottom_toTopOf="@+id/zurueckbuttonshowstockid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.07999998">
 
         <fragment
             android:id="@+id/homefragmentid"
             android:name="com.example.tradeview.homeStock1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <fragment
             android:id="@+id/buyfragmentid"
             android:name="com.example.tradeview.buyStock1"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <fragment
             android:id="@+id/sellfragmentid"
             android:name="com.example.tradeview.sellStock1"
